@@ -19,14 +19,19 @@ if [[ "$#" -ne 2 ]]; then
     usage
     exit
 fi
+os=$(uname -a)
 # the tool archives the day before
-# linuxlike
-thedayafterday=$(date --date='-1 day')
-initial="${thedayafterday}T00:00:00.000Z"
-final="${thedayafterday}T23:59:59.999Z"
-# mac
-#initial=$(date -v-1d "+%Y-%m-%d")"T00:00:00.000Z"
-#final=$(date -v-1d "+%Y-%m-%d")"T23:59:59.999Z"
+if echo "$os" | grep -q "Linux"; then
+    # linuxlike
+    thedayafterday=$(date --date='-1 day')
+    initial="${thedayafterday}T00:00:00.000Z"
+    final="${thedayafterday}T23:59:59.999Z";
+else
+  # mac
+    thedayafterday=$(date -v-1d "+%Y-%m-%d")
+    initial="${thedayafterday}T00:00:00.000Z"
+    final="${thedayafterday}T23:59:59.999Z"
+fi
 #
 echo "OCI Audit to Object Storage Archiver"
 echo "Initial audit date: ${initial}"
