@@ -20,8 +20,13 @@ if [[ "$#" -ne 2 ]]; then
     exit
 fi
 # the tool archives the day before
-initial=$(date -v-1d "+%Y-%m-%d")"T00:00:00.000Z"
-final=$(date -v-1d "+%Y-%m-%d")"T23:59:59.999Z"
+# linuxlike
+thedayafterday=$(date --date='-1 day')
+initial="${thedayafterday}T00:00:00.000Z"
+final="${thedayafterday}T23:59:59.999Z"
+# mac
+#initial=$(date -v-1d "+%Y-%m-%d")"T00:00:00.000Z"
+#final=$(date -v-1d "+%Y-%m-%d")"T23:59:59.999Z"
 #
 echo "OCI Audit to Object Storage Archiver"
 echo "Initial audit date: ${initial}"
