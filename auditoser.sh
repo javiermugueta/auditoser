@@ -23,7 +23,7 @@ os=$(uname -a)
 # the tool archives the day before
 if echo "$os" | grep -q "Linux"; then
     # linuxlike
-    thedayafterday=$(date --date='-1 day')
+    thedayafterday=$(date --date='-1 day' "+%Y-%m-%d")
     initial="${thedayafterday}T00:00:00.000Z"
     final="${thedayafterday}T23:59:59.999Z";
 else
