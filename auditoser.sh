@@ -26,11 +26,17 @@ if echo "$os" | grep -q "Linux"; then
     thedayafterday=$(date --date='-1 day' "+%Y-%m-%d")
     initial="${thedayafterday}T00:00:00.000Z"
     final="${thedayafterday}T23:59:59.999Z";
-else
-  # mac
+elif echo "$os" | grep -q "Darwin-"; then
+    # mac
     thedayafterday=$(date -v-1d "+%Y-%m-%d")
     initial="${thedayafterday}T00:00:00.000Z"
     final="${thedayafterday}T23:59:59.999Z"
+else
+    #
+    echo "I haven't been instructed by the programmer how to deal with date"
+    echo ":-("
+    echo ":-)"
+    exit -1
 fi
 #
 echo "OCI Audit to Object Storage Archiver"
