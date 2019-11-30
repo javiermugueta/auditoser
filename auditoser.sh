@@ -57,7 +57,7 @@ do
     # this variable stores the next page of results
     nextpage=`echo $result | jq '.["opc-next-page"]'`
     nextpage=$(eval echo $nextpage)
-    #echo ${nextpage}
+    echo ${nextpage}
     if [[ "$nextpage" == "" ]]; then
         # no more pages
         break
