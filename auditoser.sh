@@ -30,10 +30,10 @@ elif echo "$os" | grep -q "Darwin"; then
     # mac
     thedayafterday=$(date -v-1d "+%Y-%m-%d")
     initial="${thedayafterday}T00:00:00.000Z"
-    final="${thedayafterday}T23:59:59.999Z"
+    final="${thedayafterday}T00:00:59.999Z"
 else
     #
-    echo "I haven't been instructed by the programmer how to deal with date"
+    echo "I haven't been instructed by the programmer how to deal with date in this platform"
     echo ":-("
     echo ":-)"
     exit -1
@@ -73,5 +73,6 @@ zipfile="${file}.gz"
 tar -zcvf "${zipfile}" "${file}"
 # uploading to object storage overwriting if file already exists
 oci os object put -bn ${bucket} --file ${zipfile} --force --output table
+ls -alt
 rm ${file} $zipfile
 echo "goodbye!"
