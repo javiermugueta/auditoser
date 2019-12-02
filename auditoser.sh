@@ -69,7 +69,7 @@ do
     sleep 1
 done
 # compressing
-zipfile="${file}.zip"
+zipfile="${file}.gz"
 tar -zcvf $zipfile $file
 # uploading to object storage overwriting if file already exists
 oci os object put -bn ${bucket} --file ${zipfile} --force --output table
