@@ -70,9 +70,9 @@ do
 done
 # compressing
 zipfile="${file}.gz"
-tar -zcvf "${zipfile}" "${file}"
+gzip -f "${file}"
 # uploading to object storage overwriting if file already exists
 oci os object put -bn ${bucket} --file ${zipfile} --force --output table
 ls -alt
-rm ${file} $zipfile
+rm ${zipfile}
 echo "goodbye!"
