@@ -30,7 +30,7 @@ elif echo "$os" | grep -q "Darwin"; then
     # mac
     thedayafterday=$(date -v-1d "+%Y-%m-%d")
     initial="${thedayafterday}T00:00:00.000Z"
-    final="${thedayafterday}T00:00:59.999Z"
+    final="${thedayafterday}T23:59:59.999Z"
 else
     #
     echo "I haven't been instructed by the programmer how to deal with date"
