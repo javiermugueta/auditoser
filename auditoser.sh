@@ -26,11 +26,11 @@ if echo "$os" | grep -q "Linux"; then
     thedayafterday=$(date --date='-1 day' "+%Y-%m-%d")
     initial="${thedayafterday}T00:00:00.000Z"
     final="${thedayafterday}T23:59:59.999Z";
-elif echo "$os" | grep -q "Darwin-"; then
+elif echo "$os" | grep -q "Darwin"; then
     # mac
     thedayafterday=$(date -v-1d "+%Y-%m-%d")
     initial="${thedayafterday}T00:00:00.000Z"
-    final="${thedayafterday}T23:59:59.999Z"
+    final="${thedayafterday}T00:00:59.999Z"
 else
     #
     echo "I haven't been instructed by the programmer how to deal with date"
@@ -68,7 +68,10 @@ do
     # don't wanna fry the cpu
     sleep 1
 done
+# compressing
+zipfile="${file}.zip"
+tar -zcvf $zipfile $file
 # uploading to object storage overwriting if file already exists
-oci os object put -bn ${bucket} --file ${file} --force --output table
-rm ${file}
+oci os object put -bn ${bucket} --file ${zipfile} --force --output table
+rm ${file} $zipfile
 echo "goodbye!"
